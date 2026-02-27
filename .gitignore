@@ -1,0 +1,12 @@
+# 忽略所有 memory 文件
+MEMORY.md
+memory/
+*.md.backup
+*.tar.gz
+
+# 忽略配置文件
+openclaw.json
+
+# 忽略临时文件
+/tmp/
+*.tmp

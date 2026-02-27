@@ -77,3 +77,13 @@ security:
   - Token 应保存在配置文件中，不要提交到版本控制
   - 建议使用 Private 仓库存储 memory
   - 定期轮换 GitHub Token
+  - 技能代码不包含用户 memory 文件（运行时动态读取）
+
+# 发布时排除的文件
+publish:
+  ignore:
+    - MEMORY.md
+    - memory/
+    - openclaw.json
+    - "*.tar.gz"
+    - ".git/"
