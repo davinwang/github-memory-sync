@@ -75,6 +75,14 @@ copy_workspace_files() {
         count=$((count + 1))
     fi
     
+    # 可选：projects/agents/ 目录（多 Agent 配置）
+    if [ "$SYNC_MODE" = "full" ] && [ -d "$src/projects/agents" ] && [ "$(ls -A "$src/projects/agents" 2>/dev/null)" ]; then
+        mkdir -p "$dst/projects/agents"
+        cp -r "$src/projects/agents"/* "$dst/projects/agents/"
+        echo "  📁 projects/agents/ 目录 ($(ls "$src/projects/agents" | wc -l) 个 Agent)"
+        count=$((count + 1))
+    fi
+    
     echo ""
     echo "  共计：$count 个文件/目录"
 }
@@ -285,6 +293,14 @@ case "$1" in
         if [ -f "BOOTSTRAP.md" ]; then
             cp "BOOTSTRAP.md" "$WORKSPACE_DIR/BOOTSTRAP.md"
             echo "  📄 BOOTSTRAP.md"
+            count=$((count + 1))
+        fi
+        
+        # projects/agents/ 目录（如果存在）
+        if [ -d "projects/agents" ] && [ "$(ls -A projects/agents 2>/dev/null)" ]; then
+            mkdir -p "$WORKSPACE_DIR/projects/agents"
+            cp -r projects/agents/* "$WORKSPACE_DIR/projects/agents/"
+            echo "  📁 projects/agents/ 目录"
             count=$((count + 1))
         fi
         
